@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TIIO | Offline-First Media</title>
+    <meta
+      name="description"
+      content="Download TIIO, the offline-first Windows media hub that indexes music, video, podcasts, and audiobooks for instant, private playback."
+    />
+    <meta
+      name="keywords"
+      content="TIIO, offline media player, Windows media hub, private media playback, offline streaming alternative, audiobooks player, video player, music manager"
+    />
+    <meta name="author" content="Blacnova" />
+    <link rel="canonical" href="https://tiio.app/" />
+    <meta property="og:title" content="TIIO | Offline-First Media Hub for Windows" />
+    <meta
+      property="og:description"
+      content="Experience your personal media library with TIIO. Install the offline-first Windows application for fast, private playback without cloud dependencies."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tiio.app/" />
+    <meta property="og:image" content="https://tiio.app/icon.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TIIO | Offline-First Media Hub for Windows" />
+    <meta
+      name="twitter:description"
+      content="Bring your music, video, podcasts, and audiobooks offline with TIIO for Windows."
+    />
+    <meta name="twitter:image" content="https://tiio.app/icon.png" />
+    <meta name="theme-color" content="#121212" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="./icon.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "TIIO",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Windows 10/11",
+        "description": "TIIO is an offline-first Windows media hub that indexes your personal libraries for instant playback without cloud dependencies.",
+        "softwareVersion": "beta",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "url": "https://tiio.app/"
+        },
+        "downloadUrl": "https://github.com/nicholasxdavis/tiio-downloads/raw/main/download/beta/TIIO%20Setup.exe",
+        "image": "https://tiio.app/icon.png",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Blacnova",
+          "url": "https://www.blacnova.net"
+        }
+      }
+    </script>
+
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="./src/js/fallback/aos.css" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: 'var(--primary)',
+              'primary-light': 'var(--primary-light)',
+              'bg-base': 'var(--bg-base)',
+              'bg-sidebar': 'var(--bg-sidebar)',
+              'bg-player': 'var(--bg-player)',
+              'bg-card': 'var(--bg-card)',
+              'bg-card-hover': 'var(--bg-card-hover)',
+              'bg-glass': 'var(--bg-glass)',
+              'text-primary': 'var(--text-primary)',
+              'text-secondary': 'var(--text-secondary)',
+              'text-tertiary': 'var(--text-tertiary)',
+              'text-muted': 'var(--text-muted)',
+              'border-primary': 'var(--border-primary)',
+              'border-secondary': 'var(--border-secondary)',
+            },
+          },
+        },
+      }
+    </script>
+
+    <style>
+      :root {
+        --primary: #e2742f;
+        --primary-light: #f08545;
+        --bg-base: #121212;
+        --bg-sidebar: #000000;
+        --bg-player: #181818;
+        --bg-card: rgba(255, 255, 255, 0.04);
+        --bg-card-hover: rgba(255, 255, 255, 0.08);
+        --bg-glass: rgba(18, 18, 18, 0.97);
+        --text-primary: #ffffff;
+        --text-secondary: #b3b3b3;
+        --text-tertiary: #a7a7a7;
+        --text-muted: rgba(255, 255, 255, 0.55);
+        --border-primary: rgba(255, 255, 255, 0.1);
+        --border-secondary: #282828;
+      }
+
+      html {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          sans-serif;
+      }
+
+      body {
+        background-color: #ffffff;
+        color: #111111;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+      }
+
+      body::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      body::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      body::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.28);
+        border-radius: 20px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #2a2a2a;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background-color: transparent;
+        width: 100%;
+        text-align: left;
+      }
+
+      .nav-item:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: #000000;
+      }
+
+      .nav-item i {
+        width: 1.25rem;
+        text-align: center;
+        font-size: 1.125rem;
+      }
+
+      .play-button-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary);
+        color: #ffffff;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .play-button-primary:hover {
+        background-color: var(--primary-light);
+        transform: scale(1.03);
+      }
+
+      .download-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1.75rem;
+        border-radius: 999px;
+        font-weight: 600;
+        color: #000000;
+        background: linear-gradient(135deg, #ffffff 0%, #f5c099 45%, #e2742f 100%);
+        box-shadow: 0 18px 30px rgba(226, 116, 47, 0.25);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        overflow: hidden;
+      }
+
+      .download-button::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.4) 45%,
+          rgba(255, 255, 255, 0.7) 52%,
+          transparent 60%
+        );
+        transform: translateX(-120%) skewX(-20deg);
+        animation: button-shimmer 2.6s infinite;
+      }
+
+      .download-button span,
+      .download-button i {
+        position: relative;
+        z-index: 1;
+      }
+
+      .download-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 22px 38px rgba(226, 116, 47, 0.35);
+      }
+
+      .download-button i {
+        font-size: 0.95rem;
+      }
+
+      @keyframes button-shimmer {
+        0% {
+          transform: translateX(-120%) skewX(-20deg);
+        }
+        60% {
+          transform: translateX(220%) skewX(-20deg);
+        }
+        100% {
+          transform: translateX(220%) skewX(-20deg);
+        }
+      }
+
+      .artist-profile__back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 18px;
+        border-radius: 14px;
+        background: rgba(0, 0, 0, 0.05);
+        color: #111111;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        font-weight: 600;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        transition: background 0.2s ease, color 0.2s ease, border 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .artist-profile__back-button:hover {
+        background: rgba(0, 0, 0, 0.08);
+        color: #000000;
+        border-color: rgba(0, 0, 0, 0.24);
+        transform: translateY(-1px);
+      }
+
+      .media-card {
+        background: #f7f7f7;
+        border-radius: 14px;
+        padding: 1.5rem;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+      }
+
+      .media-card:hover {
+        background: #f0f0f0;
+        transform: translateY(-4px);
+        border-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .media-card img {
+        border-radius: 12px;
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 1;
+      }
+
+      .faq-item {
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
+        padding: 1.5rem;
+        transition: border 0.2s ease, transform 0.2s ease;
+      }
+
+      .faq-item:hover {
+        border-color: rgba(226, 116, 47, 0.45);
+        transform: translateY(-2px);
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        background: #ffffff;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .comparison-table thead th {
+        background: linear-gradient(135deg, rgba(226, 116, 47, 0.12), rgba(226, 116, 47, 0.22));
+        color: #111111;
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 1rem 1.25rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .comparison-table tbody td {
+        padding: 1.15rem 1.25rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        font-size: 0.95rem;
+        vertical-align: top;
+      }
+
+      .comparison-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .comparison-table tbody tr:nth-child(even) td {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      .comparison-table strong {
+        font-weight: 600;
+      }
+
+      .brand-cell {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .brand-logo {
+        width: 64px;
+        height: 32px;
+        min-width: 64px;
+        object-fit: contain;
+        object-position: left center;
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .brand-logo--circle {
+        border-radius: 0;
+      }
+
+      .brand-logo--wide {
+        width: 64px;
+        min-width: 64px;
+        padding: 0;
+        border-radius: 0;
+      }
+
+      .comparison-footnotes {
+        font-size: 0.8rem;
+        color: #6b6b6b;
+      }
+
+      .comparison-footnotes a {
+        text-decoration: underline;
+        text-decoration-color: rgba(226, 116, 47, 0.6);
+      }
+
+    </style>
+  </head>
+
+  <body class="antialiased">
+    <header class="bg-black text-white sticky top-0 z-50 border-b border-white/10 backdrop-blur">
+      <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-6">
+        <div class="flex items-center gap-3">
+          <img
+            src="./icon.png"
+            alt="TIIO Logo"
+            class="h-12 w-12 rounded-lg object-cover border border-white/20"
+          />
+          <div>
+
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-8 text-sm uppercase tracking-wide">
+          <a href="#features" class="hover:text-primary transition-colors">Features</a>
+          <a href="#offline" class="hover:text-primary transition-colors">Why TIIO</a>
+          <a href="#download" class="hover:text-primary transition-colors">Download</a>
+          <a href="#compare" class="hover:text-primary transition-colors">Compare</a>
+          <a href="https://buymeacoffee.com/galore" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">
+            Support Us
+          </a>
+          <a href="#faq" class="hover:text-primary transition-colors">FAQ</a>
+        </nav>
+        <a
+          href="https://github.com/nicholasxdavis/tiio-downloads/raw/main/download/beta/TIIO%20Setup.exe"
+          class="download-button"
+          download
+        >
+          <span>Download</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="px-6 py-16 md:py-20 bg-white" data-aos="fade" data-aos-duration="900">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6" data-aos="fade" data-aos-delay="120">
+            <p class="uppercase tracking-[0.4em] text-xs text-neutral-500">Meet TIIO</p>
+            <h2 class="text-4xl md:text-5xl font-black text-black leading-tight">
+              Offline playback<br> that feels like a streaming service.
+            </h2>
+            <p class="text-lg text-neutral-600 leading-relaxed">
+              TIIO is a Windows desktop application that indexes the media collections you
+              already own and wraps them in a modern, responsive experience. No cloud
+              dependencies, no missing albums, just instant playback wherever you are.
+            </p>
+            <div class="flex flex-wrap items-center gap-4">
+              <a
+                href="https://github.com/nicholasxdavis/tiio-downloads/raw/main/download/beta/TIIO%20Setup.exe"
+                class="play-button-primary"
+                download
+              >
+                <i class="fas fa-circle-arrow-down"></i>
+                <span>Download for Windows</span>
+              </a>
+            </div>
+            <div class="flex flex-wrap items-center gap-6 pt-4">
+              <div>
+                <p class="text-sm font-semibold text-neutral-500 uppercase">Indexed Media</p>
+                <p class="text-2xl font-black text-black">10,000+</p>
+              </div>
+              <div class="h-12 w-[1px] bg-neutral-200"></div>
+              <div>
+                <p class="text-sm font-semibold text-neutral-500 uppercase">Offline Ready</p>
+                <p class="text-2xl font-black text-black">100%</p>
+              </div>
+              <div class="h-12 w-[1px] bg-neutral-200"></div>
+              <div>
+                <p class="text-sm font-semibold text-neutral-500 uppercase">
+                  Personal Libraries
+                </p>
+                <p class="text-2xl font-black text-black">Unlimited</p>
+              </div>
+            </div>
+          </div>
+          <div class="relative hero-visual" data-aos="fade" data-aos-delay="200">
+            <div class="absolute -top-8 -left-6 h-28 w-28 rounded-2xl bg-primary/10 blur-3xl"></div>
+            <div class="absolute -bottom-12 -right-8 h-32 w-32 rounded-full bg-primary-light/10 blur-3xl"></div>
+            <div class="relative border border-neutral-100 shadow-2xl overflow-hidden">
+              <img
+                src="./img/home-ss.png"
+                alt="TIIO home screen"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="bg-neutral-50 border-y border-neutral-100 py-20" data-aos="fade-up" data-aos-duration="900">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div>
+              <p class="uppercase tracking-[0.4em] text-xs text-neutral-500">
+                Core Features
+              </p>
+              <h3 class="text-3xl md:text-4xl font-black text-black leading-tight mt-3">
+                Built for collections,<br> tuned for performance.
+              </h3>
+            </div>
+            <p class="md:max-w-xl text-neutral-600">
+              TIIO understands music, video, podcasts, and audiobooks side-by-side. Scan
+              your add-on folders once; TIIO keeps everything optimized and visually
+              polished without touching the internet.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="media-card">
+              <div class="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center">
+                <i class="fas fa-bolt text-lg"></i>
+              </div>
+              <h4 class="text-xl font-semibold text-black mt-6">Instant Offline Indexing</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Dexie-backed indexing keeps metadata local and fast. Launch the app and
+                every shelf, playlist, and search is ready without network calls.
+              </p>
+            </div>
+
+            <div class="media-card">
+              <div class="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center">
+                <i class="fas fa-layer-group text-lg"></i>
+              </div>
+              <h4 class="text-xl font-semibold text-black mt-6">Unified Media Shelves</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Music, videos, podcasts, audiobooks, and custom add-ons are displayed in
+                adaptive grids. Switch between list, compact, or cinematic layouts.
+              </p>
+            </div>
+
+            <div class="media-card">
+              <div class="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center">
+                <i class="fas fa-headphones text-lg"></i>
+              </div>
+              <h4 class="text-xl font-semibold text-black mt-6">Howler + Plyr Playback</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Advanced playback stacks deliver smooth gapless audio, quick scrubbing,
+                and precise video controls, scaled to your offline library.
+              </p>
+            </div>
+
+            <div class="media-card">
+              <div class="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center">
+                <i class="fas fa-heart text-lg"></i>
+              </div>
+              <h4 class="text-xl font-semibold text-black mt-6">Smart Favorites</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Favorite, pin, or resume media instantly. TIIO remembers your state across
+                sessions without syncing to the cloud.
+              </p>
+            </div>
+
+            <div class="media-card">
+              <div class="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center">
+                <i class="fas fa-desktop text-lg"></i>
+              </div>
+              <h4 class="text-xl font-semibold text-black mt-6">Desktop-Grade Shell</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                The Windows build includes a hardened Electron shell, native title bars,
+                and local assets to keep every panel consistent even without internet
+                access.
+              </p>
+            </div>
+
+            <div class="media-card">
+              <div class="w-12 h-12 rounded-xl bg-black text-white flex items-center justify-center">
+                <i class="fas fa-lock text-lg"></i>
+              </div>
+              <h4 class="text-xl font-semibold text-black mt-6">Private By Design</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                No logins, telemetry, or remote licensing. Your archive stays local,
+                portable, and under your control.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="offline" class="py-20 bg-white" data-aos="fade-up" data-aos-duration="900">
+        <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <div class="relative order-2 lg:order-1">
+            <div class="relative border border-neutral-200 bg-neutral-900 overflow-hidden shadow-2xl">
+              <img
+                src="./img/movie-ss.png"
+                alt="TIIO movie playback view"
+                class="w-full h-full object-cover opacity-90"
+              />
+            </div>
+          </div>
+          <div class="order-1 lg:order-2">
+            <p class="uppercase tracking-[0.4em] text-xs text-neutral-500">Why TIIO</p>
+            <h3 class="text-3xl md:text-4xl font-black text-black leading-tight mt-3">
+              Take your entire media, Anywhere.
+            </h3>
+            <div class="mt-8 space-y-6">
+              <div class="flex gap-4">
+                <i class="fas fa-plane-up text-black text-xl"></i>
+                <div>
+                  <h4 class="text-xl font-semibold text-black">Travel-Proof Playback</h4>
+                  <p class="text-neutral-600 leading-relaxed mt-2">
+                    Cruise through flights, remote work, and air-gapped networks with a
+                    player that never checks in with a server.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <i class="fas fa-folder-open text-primary text-xl"></i>
+                <div>
+                  <h4 class="text-xl font-semibold text-black">Add-On Folder Control</h4>
+                  <p class="text-neutral-600 leading-relaxed mt-2">
+                    Point TIIO at any directory structure. It generates artwork, metadata,
+                    and shelves while keeping your original files untouched.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <i class="fas fa-gauge-high text-black text-xl"></i>
+                <div>
+                  <h4 class="text-xl font-semibold text-black">Predictable Performance</h4>
+                  <p class="text-neutral-600 leading-relaxed mt-2">
+                    Indexed caches, pre-baked previews, and a tuned player stack keep
+                    everything responsive no matter how large your library grows.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 bg-neutral-50 border-t border-neutral-100" data-aos="fade-up" data-aos-duration="900">
+        <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-5">
+            <p class="uppercase tracking-[0.4em] text-xs text-neutral-500">Live Context</p>
+            <h3 class="text-3xl md:text-4xl font-black text-black leading-tight">
+              Lyrics stay onboard, even when you are offline.
+            </h3>
+            <p class="text-neutral-600 leading-relaxed">
+              TIIO keeps lyric sheets locally so you can read them inside the player without
+              opening a browser or streaming service.
+            </p>
+          </div>
+          <div class="relative">
+            <div class="absolute -top-6 -right-8 h-28 w-28 rounded-3xl bg-primary/15 blur-3xl"></div>
+            <div class="relative border border-neutral-100 shadow-2xl overflow-hidden">
+              <img
+                src="./img/lyrics-ss.png"
+                alt="TIIO lyrics display"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="download" class="py-24 bg-black" data-aos="fade-up" data-aos-duration="900">
+        <div class="max-w-6xl mx-auto px-6 text-white">
+          <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-12 items-center">
+            <div class="space-y-6">
+              <p class="uppercase tracking-[0.4em] text-xs text-white/50">Download</p>
+              <h3 class="text-3xl md:text-4xl font-black leading-tight">
+                Install TIIO for Windows,<br> Go fully offline.
+              </h3>
+              <p class="text-white/70 leading-relaxed">
+                The Windows installer includes everything required—just bring your own media.
+              </p>
+              <div class="flex flex-wrap items-center gap-4" data-aos="fade-right" data-aos-delay="140">
+                <a
+                  href="https://github.com/nicholasxdavis/tiio-downloads/raw/main/download/beta/TIIO%20Setup.exe"
+                  class="download-button"
+                  download
+                >
+                  <span>Download .exe</span>
+                </a>
+              </div>
+            </div>
+            <div class="relative" data-aos="fade-left" data-aos-delay="200">
+              <div class="absolute inset-x-0 -bottom-8 h-24 bg-gradient-to-b from-[#e2742f33] via-[#e2742f18] to-transparent blur-2xl rounded-[32px] pointer-events-none"></div>
+              <div class="relative bg-[#000000] border border-white/10 rounded-3xl p-7 lg:p-8 space-y-5">
+              <div class="space-y-2">
+                <p class="text-xs uppercase tracking-[0.35em] text-white/50">Release</p>
+                <h4 class="text-xl font-semibold text-white/90">TIIO beta</h4>
+                <p class="text-white/60 text-xs">Last updated: Nov 13, 2025</p>
+                <p class="text-white/60 text-xs">Installer size: 81 MB</p>
+              </div>
+              <div class="border-t border-white/10 pt-3 text-white/50 text-xs">
+                <p class="leading-relaxed">
+                  Need macOS or Linux builds? Join the waitlist via
+                  <a href="mailto:hello@tiio.app" class="underline hover:text-primary">tiio@blacnova.net</a>.
+                </p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 bg-neutral-50 border-t border-neutral-100" data-aos="fade-up" data-aos-duration="900">
+        <div class="max-w-6xl mx-auto px-6">
+          <h3 class="text-3xl md:text-4xl font-black text-black leading-tight">
+            Installation in three steps.
+          </h3>
+          <div class="grid md:grid-cols-3 gap-8 mt-12">
+            <div class="faq-item">
+              <p class="text-sm uppercase tracking-[0.3em] text-neutral-500">
+                Step 01
+              </p>
+              <h4 class="text-xl font-semibold text-black mt-4">Download Installer</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Click the “Download .exe” button on this page to grab the latest Windows
+                installer.
+              </p>
+            </div>
+            <div class="faq-item">
+              <p class="text-sm uppercase tracking-[0.3em] text-neutral-500">
+                Step 02
+              </p>
+              <h4 class="text-xl font-semibold text-black mt-4">Run Setup</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Run the setup file you downloaded and follow the prompts to install TIIO.
+              </p>
+            </div>
+            <div class="faq-item">
+              <p class="text-sm uppercase tracking-[0.3em] text-neutral-500">
+                Step 03
+              </p>
+              <h4 class="text-xl font-semibold text-black mt-4">Launch TIIO</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Launch TIIO, connect your media folders when prompted, and start playing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="compare" class="py-24 bg-white" data-aos="fade-up" data-aos-duration="900">
+        <div class="max-w-6xl mx-auto px-6 space-y-16">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div>
+              <p class="uppercase tracking-[0.4em] text-xs text-neutral-500">Compare</p>
+              <h3 class="text-3xl md:text-4xl font-black text-black leading-tight mt-3">
+                TIIO stays lighter on your system and simpler to deploy.
+              </h3>
+            </div>
+            <p class="md:max-w-xl text-neutral-600">
+              Benchmarks below are real-world measurements on Windows 11 Pro running TIIO
+              alongside the most common streaming and media apps. Figures will vary by
+              machine, but the pattern holds: TIIO consumes fewer resources because nothing
+              streams or phones home.
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            <h4 class="text-xl font-semibold text-black">System Resource Footprint</h4>
+            <div class="overflow-x-auto">
+              <table class="comparison-table min-w-[720px]">
+                <thead>
+                  <tr>
+                    <th>App / Tab</th>
+                    <th class="text-right">RAM (typical observed)</th>
+                    <th class="text-right">CPU while playing (typical observed)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="brand-cell">
+                        <img src="./icon.png" alt="TIIO logo" class="brand-logo" />
+                        <span><strong>TIIO</strong> (your measurement)</span>
+                      </div>
+                    </td>
+                    <td class="text-right"><strong>~150 MB</strong> (measured locally)</td>
+                    <td class="text-right"><strong>~0%–8%</strong> (measured locally)</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="brand-cell">
+                        <img src="./img/spotify.png" alt="Spotify logo" class="brand-logo brand-logo--circle" />
+                        <span><strong>Spotify</strong> - Desktop client (normal play)</span>
+                      </div>
+                    </td>
+                    <td class="text-right"><strong>~200–400 MB</strong> (often ≈300 MB; can spike higher)</td>
+                    <td class="text-right"><strong>Low-single digits to mid teens %</strong> (reports of 8–15%+)</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="brand-cell">
+                        <img src="./img/chrome.png" alt="Chrome logo" class="brand-logo brand-logo--circle" />
+                        <span><strong>YouTube</strong> - single 1080p tab (Chrome/Brave/Firefox)</span>
+                      </div>
+                    </td>
+                    <td class="text-right"><strong>~500 MB – 1.5+ GB</strong> (commonly ≈1 GB on heavier configs)</td>
+                    <td class="text-right"><strong>~2%–15%</strong> with HW decode; spikes higher without it)</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="brand-cell">
+                        <img src="./img/Netflix_2015_logo.svg.png" alt="Netflix logo" class="brand-logo brand-logo--wide" />
+                        <span><strong>Netflix</strong> - single 1080p tab (Chrome/Edge)</span>
+                      </div>
+                    </td>
+                    <td class="text-right"><strong>~400 MB – 1+ GB</strong> (DRM + browser overhead)</td>
+                    <td class="text-right"><strong>Low single digits to mid teens %</strong> with HW decode; spikes otherwise</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="brand-cell">
+                        <img src="./img/hulu.png" alt="Hulu logo" class="brand-logo brand-logo--wide" />
+                        <span><strong>Hulu</strong> - single 1080p tab (browser)</span>
+                      </div>
+                    </td>
+                    <td class="text-right"><strong>~400 MB – 1+ GB</strong> (similar to YouTube/Netflix)</td>
+                    <td class="text-right"><strong>Low single digits</strong> with HW decode; spikes on DRM mismatches</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <h4 class="text-xl font-semibold text-black">Architecture & Privacy Snapshot</h4>
+            <div class="overflow-x-auto">
+              <table class="comparison-table min-w-[720px]">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>
+                      <div class="brand-cell">
+                        <img src="./icon.png" alt="TIIO logo" class="brand-logo" />
+                        <span>TIIO</span>
+                      </div>
+                    </th>
+                    <th>
+                      <div class="brand-cell">
+                        <img src="./img/plex.png" alt="Plex logo" class="brand-logo brand-logo--wide" />
+                        <span>Plex</span>
+                      </div>
+                    </th>
+                    <th>
+                      <div class="brand-cell">
+                        <img src="./img/jelly.png" alt="Jellyfin logo" class="brand-logo brand-logo--wide" />
+                        <span>Jellyfin</span>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Core Design</strong></td>
+                    <td>Local-first desktop app for Windows 10/11. No servers, accounts, or cloud sync.</td>
+                    <td>Centralized server–client setup; serves media locally or remotely.</td>
+                    <td>Open-source server–client system; self-hosted Plex alternative.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Hosting Model</strong></td>
+                    <td><strong>Standalone app.</strong> Media never leaves your device.</td>
+                    <td>Requires running Plex Media Server (local/NAS/cloud).</td>
+                    <td>Requires Jellyfin Server on your network.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Network Dependence</strong></td>
+                    <td><strong>Offline capable.</strong> Functions fully without internet.</td>
+                    <td>Needs network for streaming and metadata pulls.</td>
+                    <td>Offline locally, but metadata refresh and sync expect connectivity.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Privacy / Data Flow</strong></td>
+                    <td><strong>No data leaves your PC.</strong> No telemetry, accounts, or remote calls.</td>
+                    <td>Cloud-linked; sends usage and metadata to Plex services.</td>
+                    <td>Can be private, but still uses server ↔ client traffic.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Library Management</strong></td>
+                    <td>Reads folders directly; instant indexing of media.</td>
+                    <td>Server scans and stores metadata in a database.</td>
+                    <td>Same: server indexes, clients query.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Storage / Access</strong></td>
+                    <td>Files stay in place; optional local cache only.</td>
+                    <td>May transcode and cache on server.</td>
+                    <td>Can transcode/cache on server (optional).</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Playback Pipeline</strong></td>
+                    <td>Local playback via HTML5/Howler.js + direct file streams.</td>
+                    <td>HTTP streaming and transcoding as needed.</td>
+                    <td>HTTP streaming with optional transcoding.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>User Experience</strong></td>
+                    <td>Straightforward library view for music, video, podcasts, and audiobooks.</td>
+                    <td>Dashboard UI that varies per device.</td>
+                    <td>Functional OSS UI, less unified out of the box.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Target User</strong></td>
+                    <td>Users wanting offline control, privacy, and ownership.</td>
+                    <td>People streaming libraries across many devices.</td>
+                    <td>Power users managing self-hosted services.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="faq" class="py-20 bg-white" data-aos="fade-up" data-aos-duration="900">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div>
+              <p class="uppercase tracking-[0.4em] text-xs text-neutral-500">FAQ</p>
+              <h3 class="text-3xl md:text-4xl font-black text-black leading-tight mt-3">
+                Answers for teams adopting TIIO.
+              </h3>
+            </div>
+            <p class="md:max-w-xl text-neutral-600">
+              Need more details? Reach out for custom builds, integration services, or
+              enterprise licensing.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="faq-item">
+              <h4 class="text-xl font-semibold text-black">Does TIIO require an internet connection?</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                No. TIIO is designed to run entirely offline. The interface assets and
+                playback stack are bundled locally, and the app never calls external APIs
+                after installation.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4 class="text-xl font-semibold text-black">Which operating systems are supported?</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Windows builds are available now. Mac and Linux builds are in beta - join the
+                waitlist to receive early access packages.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4 class="text-xl font-semibold text-black">How are add-on folders managed?</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Point TIIO at any directory. It indexes metadata without altering files, and
+                you can re-run scans or pause indexing at any time.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h4 class="text-xl font-semibold text-black">Can I customize the interface?</h4>
+              <p class="text-neutral-600 mt-3 leading-relaxed">
+                Not yet. Full theme customization is on our roadmap, but today the TIIO
+                interface ships with a fixed palette so every install looks identical
+                offline.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-black text-white">
+      <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-12">
+        <div>
+          <div class="flex items-center gap-3">
+            <img
+              src="./icon.png"
+              alt="TIIO Logo"
+              class="h-10 w-10 rounded-lg object-cover border border-white/20"
+            />
+
+          </div>
+          <p class="mt-4 text-white/70 leading-relaxed">
+            The Internet Is Out - a modern, offline media hub for music, video, podcasts,
+            audiobooks, and more. Designed for anyone who needs air-gapped performance with
+            streaming-era polish.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-8">
+          <div>
+            <h5 class="uppercase text-sm tracking-[0.3em] text-white/60">Product</h5>
+            <ul class="mt-4 space-y-2 text-white/80 text-sm">
+              <li><a href="#features" class="hover:text-primary transition-colors">Features</a></li>
+              <li><a href="#download" class="hover:text-primary transition-colors">Download</a></li>
+              <li><a href="#faq" class="hover:text-primary transition-colors">FAQ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="uppercase text-sm tracking-[0.3em] text-white/60">Connect</h5>
+            <ul class="mt-4 space-y-2 text-white/80 text-sm">
+              <li><a href="mailto:tiio@blacnova.net" class="hover:text-primary transition-colors">Email</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-white/60 text-sm">
+          <p>© 2025 TIIO by <a href="https://www.blacnova.net" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary">Blacnova</a>. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="legal/index.html" class="hover:text-primary transition-colors">Privacy</a>
+            <a href="legal/index.html#terms" class="hover:text-primary transition-colors">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Animation Libraries -->
+    <script src="./src/js/fallback/anime.min.js"></script>
+    <script src="./src/js/fallback/aos.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        AOS.init({
+          once: true,
+          offset: 80,
+        })
+
+        anime({
+          targets: '.hero-visual',
+          opacity: [0, 1],
+          scale: [0.96, 1],
+          duration: 1200,
+          easing: 'easeOutExpo',
+        })
+
+        anime({
+          targets: '.download-button',
+          scale: [0.95, 1],
+          opacity: [0, 1],
+          delay: 300,
+          duration: 900,
+          easing: 'easeOutElastic(1, .8)',
+        })
+      })
+    </script>
+  </body>
+</html>
+
