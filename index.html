@@ -389,7 +389,22 @@
   </head>
 
   <body class="antialiased">
-    <header class="bg-black text-white sticky top-0 z-50 border-b border-white/10 backdrop-blur">
+    <div
+      class="md:hidden bg-primary text-text-primary min-h-screen flex items-center justify-center p-6"
+    >
+      <div class="text-center opacity-90 max-w-md">
+        <div class="text-6xl font-normal mb-6" aria-hidden="true">:'(</div>
+        <h1 class="text-3xl font-bold mb-4 leading-snug">
+          Currently,<br />TIIO is available only for Windows.
+        </h1>
+        <p class="text-base mb-6">
+          Support for additional platforms is planned for the future.
+        </p>
+      </div>
+    </div>
+
+    <div class="hidden md:block">
+      <header class="bg-black text-white sticky top-0 z-50 border-b border-white/10 backdrop-blur">
       <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-6">
         <div class="flex items-center gap-3">
           <img
@@ -992,6 +1007,7 @@
         </div>
       </div>
     </footer>
+    </div>
 
     <!-- Animation Libraries -->
     <script src="./src/js/fallback/anime.min.js"></script>

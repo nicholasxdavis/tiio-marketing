@@ -4,7 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TIIO | Legal Policies</title>
-
+    <meta
+      name="description"
+      content="Understand TIIO's legal policies, privacy commitments, acceptable use guidelines, and security practices for the offline-first Windows media hub."
+    />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <link rel="canonical" href="https://tiio.app/legal/" />
+    <link rel="alternate" href="https://tiio.app/legal/" hreflang="en" />
+    <link rel="alternate" href="https://tiio.app/legal/" hreflang="x-default" />
+    <meta property="og:site_name" content="TIIO" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://tiio.app/legal/" />
+    <meta property="og:title" content="TIIO | Legal Policies" />
+    <meta
+      property="og:description"
+      content="Review TIIO's privacy policy, terms of service, security practices, and acceptable use guidelines for the offline-first Windows media hub."
+    />
+    <meta property="og:image" content="https://tiio.app/icon.png" />
+    <meta property="og:image:alt" content="TIIO offline-first media hub icon" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="TIIO | Legal Policies" />
+    <meta
+      name="twitter:description"
+      content="Get the latest on TIIO's privacy, terms, security, and acceptable use policies for the offline-first Windows media hub."
+    />
+    <meta name="twitter:image" content="https://tiio.app/icon.png" />
+    <meta name="twitter:image:alt" content="TIIO offline-first media hub icon" />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -33,7 +59,7 @@
     </script>
   </head>
 
-  <body class="bg-white text-neutral-900 font-sans antialiased">
+  <body id="top" class="bg-white text-neutral-900 font-sans antialiased">
     <header class="bg-black text-white">
       <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-6">
         <div class="flex items-center gap-3">
@@ -43,10 +69,12 @@
             class="h-12 w-12 rounded-lg object-cover border border-white/20"
           />
           <div>
-
+            <a href="../index.html" class="text-lg font-semibold tracking-wide text-white hover:text-primary transition-colors" aria-label="Return to TIIO homepage">
+              TIIO · Policies
+            </a>
           </div>
         </div>
-        <nav class="hidden md:flex items-center gap-8 text-sm uppercase tracking-wide">
+        <nav class="hidden md:flex items-center gap-8 text-sm uppercase tracking-wide" aria-label="Primary">
           <a href="../index.html#features" class="hover:text-primary transition-colors">Features</a>
           <a href="../index.html#offline" class="hover:text-primary transition-colors">Why TIIO</a>
           <a href="../index.html#download" class="hover:text-primary transition-colors">Download</a>
@@ -64,17 +92,42 @@
       </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-16 space-y-12">
+    <main class="max-w-5xl mx-auto px-6 py-16 space-y-12" role="main">
       <section class="space-y-3">
         <p class="text-xs uppercase tracking-[0.4em] text-neutral-500">Overview</p>
-        <h2 class="text-3xl font-bold text-black leading-tight">
+        <h1 class="text-3xl font-bold text-black leading-tight">
           How TIIO handles privacy, licensing, and user responsibilities.
-        </h2>
+        </h1>
         <p class="text-neutral-600 leading-relaxed">
           TIIO is an offline-first desktop media hub from Blacnova. We do not run hosted media
           services; you point TIIO at files you control. These policies explain how we treat your
           data, what we expect from users, and how to get help if something goes wrong.
         </p>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-5">
+          <p class="text-sm font-semibold text-neutral-700 uppercase tracking-[0.3em] mb-3">
+            Quick links
+          </p>
+          <ul class="grid gap-2 text-sm text-neutral-700 md:grid-cols-2">
+            <li>
+              <a href="#terms" class="hover:text-primary transition-colors">Terms of Service</a>
+            </li>
+            <li>
+              <a href="#privacy" class="hover:text-primary transition-colors">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#security" class="hover:text-primary transition-colors">Security &amp; Updates</a>
+            </li>
+            <li>
+              <a href="#acceptable-use" class="hover:text-primary transition-colors">Acceptable Use</a>
+            </li>
+            <li>
+              <a href="#warranty" class="hover:text-primary transition-colors">Warranty &amp; Liability</a>
+            </li>
+            <li>
+              <a href="#contact" class="hover:text-primary transition-colors">Contact Blacnova</a>
+            </li>
+          </ul>
+        </div>
       </section>
 
       <section id="terms" class="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 space-y-4">
@@ -116,7 +169,7 @@
         </ul>
       </section>
 
-      <section class="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 space-y-4">
+      <section id="security" class="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 space-y-4">
         <h3 class="text-2xl font-semibold text-black">Security & Updates</h3>
         <p class="text-neutral-700">
           Installers are signed by Blacnova and ship with published SHA-256 hashes. Verify the hash
@@ -133,7 +186,7 @@
         </p>
       </section>
 
-      <section class="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 space-y-4">
+      <section id="acceptable-use" class="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 space-y-4">
         <h3 class="text-2xl font-semibold text-black">Acceptable Use</h3>
         <ul class="list-disc pl-6 space-y-2 text-neutral-700">
           <li>Do not use TIIO to infringe copyright, violate DRM, or distribute unlicensed media.</li>
@@ -142,7 +195,7 @@
         </ul>
       </section>
 
-      <section class="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 space-y-4">
+      <section id="warranty" class="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 space-y-4">
         <h3 class="text-2xl font-semibold text-black">Warranty & Liability</h3>
         <p class="text-neutral-700">
           TIIO is provided “as is.” To the extent permitted by law, Blacnova disclaims all implied
@@ -152,12 +205,12 @@
         </p>
       </section>
 
-      <section class="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 space-y-4">
+      <section id="contact" class="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 space-y-4">
         <h3 class="text-2xl font-semibold text-black">Contact</h3>
         <p class="text-neutral-700 leading-relaxed">
           <span class="font-semibold">Blacnova</span><br />
-          Legal & Security: <a href="mailto:tiio@blacnova.net" class="text-primary underline">tiio@blacnova.net</a><br />
-          Product Support: <a href="mailto:hello@tiio.app" class="text-primary underline">hello@blacnova.net</a><br />
+          Legal &amp; Security: <a href="mailto:tiio@blacnova.net" class="text-primary underline">tiio@blacnova.net</a><br />
+          Product Support: <a href="mailto:hello@tiio.app" class="text-primary underline">hello@tiio.app</a><br />
           Website: <a href="https://www.blacnova.net" target="_blank" rel="noopener noreferrer" class="text-primary underline">blacnova.net</a>
         </p>
         <p class="text-xs uppercase tracking-[0.3em] text-neutral-500">
@@ -219,6 +272,41 @@
         </div>
       </div>
     </footer>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "TIIO Legal Policies",
+        "url": "https://tiio.app/legal/",
+        "description": "TIIO's legal policies and privacy commitments for the offline-first Windows media hub.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "TIIO Offline Media Hub",
+          "url": "https://tiio.app/"
+        },
+        "inLanguage": "en-US"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "TIIO Offline Media Hub",
+            "item": "https://tiio.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Legal Policies",
+            "item": "https://tiio.app/legal/"
+          }
+        ]
+      }
+    </script>
   </body>
 </html>
 
